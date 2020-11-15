@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4942a555e647643f995291cf5af700ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireSfx: {fileID: 8300000, guid: ccefaa472ac284a66a560035a0e0b8f1, type: 3}
   damage: 5
   bulletSpeed: 10
   fireInterval: 0.2
@@ -284,6 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ca212555cc5e438ab288f21dc1c74f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  edge: 5
   speed: 5
   upKey: 119
   downKey: 115
@@ -308,6 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  deathSfx: {fileID: 0}
   onDeath:
     m_PersistentCalls:
       m_Calls:

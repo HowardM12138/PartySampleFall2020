@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour {
 
 	[Header("Configurations")]
 	public Rigidbody2D rigidbody;
-	public WeaponController weapon;
+	public IWeapon weapon;
 	
 	[Header("Status (Do not modify these fields through Editor)")]
 	public float velocityX;
@@ -50,7 +50,8 @@ public class PlayerController : MonoBehaviour {
 		var rotZ = Quaternion.LookRotation(weapon.transform.position - mousePos, Vector3.forward).eulerAngles.z;
 		weapon.transform.rotation = Quaternion.Euler(0, 0, rotZ);
 
-		if (Input.GetKey(fireKey)) weapon.Trigger();
+		if (Input.GetKey(fireKey)) weapon.OnTriggerPressed();
+		if (Input.GetKeyUp(fireKey)) weapon.OnTriggerReleased();
 	}
 
 	public void OnDeath() {

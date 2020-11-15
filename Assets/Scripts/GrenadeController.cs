@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
 
-public class GrenadeController : MonoBehaviour
-{
+public class GrenadeController : MonoBehaviour {
+    
     public string damageTag = "Player";
     public int damage;
     public float timeToExplode;
@@ -12,26 +12,20 @@ public class GrenadeController : MonoBehaviour
     public float timeStart;
     public float currentTime;
     
-    private void Awake()
-    {
+    private void Awake() {
         timeStart = Time.time;
     }
 
-    private void Update()
-    {
+    private void Update() {
         currentTime = Time.time;
-        if (currentTime - timeStart >= timeToExplode)
-        {
+        if (currentTime - timeStart >= timeToExplode) {
             Explode();    
         }
     }
 
-    private void Explode()
-    {
-        foreach (Collider2D col in Physics2D.OverlapCircleAll(transform.position, radius))
-        {
-            if (col.CompareTag(damageTag))
-            {
+    private void Explode() {
+        foreach (Collider2D col in Physics2D.OverlapCircleAll(transform.position, radius)) {
+            if (col.CompareTag(damageTag)) {
                 if (col.TryGetComponent(out Health health)) {
                     health.OnBulletHit(damage);
                 }

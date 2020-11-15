@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ShotgunController : MonoBehaviour{
+public class ShotgunController : IWeapon {
 
     [Header("Settings")]
     public int damage;
@@ -18,20 +18,18 @@ public class ShotgunController : MonoBehaviour{
     [Header("Status (Do not modify these fields through Editor)")]
     public float lastFireTime;
 
-    public void Trigger() {
+    public override void OnTriggerPressed() {
         if (CanFire()) {
             Fire();
         }
     }
     
-    public bool CanFire() {
+    public override bool CanFire() {
         var time = Time.time;
         return lastFireTime + fireInterval <= time;
     }
 
-
-    private void Fire()
-    {
+    private void Fire() {
         lastFireTime = Time.time;
         float angleInRad = Mathf.Deg2Rad * angle;
         float startAngle = -1 * Vector2.SignedAngle(transform.up, new Vector2(1, 0)) * Mathf.Deg2Rad;
@@ -39,9 +37,7 @@ public class ShotgunController : MonoBehaviour{
         float degreesBetween = angleInRad / (numberBullets - 1);
         
         float ang = firstDegree;
-        for (int i = 0; i < numberBullets; i++)
-        {
-
+        for (int i = 0; i < numberBullets; i++) {
             var bullet = Instantiate(bulletPrototype, fireOrigin ? fireOrigin.position : transform.position, transform.rotation);
             var controller = bullet.GetComponent<BulletController>();
             controller.damage = damage;
@@ -49,12 +45,10 @@ public class ShotgunController : MonoBehaviour{
             float xVel = Mathf.Cos(ang);
             float yVel = Mathf.Sin(ang);
             controller.GetComponent<Rigidbody2D>().velocity = new Vector2(xVel, yVel) * bulletSpeed;
-            //Debug.Log(bullet.transform.up);
             ang += degreesBetween;
 
         }
-        //weapon.velocity = new Vector2(Mathf.Cos(
-        //Mathf.Deg2Rad * angle),Mathf.Sin(Mathf.Deg2Rad * angle)) * speed;
+
+        AudioManager.PlayAtPoint(fireSfx, fireOrigin ? fireOrigin.position : transform.position);
     }
-        
 }
