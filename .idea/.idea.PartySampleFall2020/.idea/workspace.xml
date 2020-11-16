@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="00f732f6-0f6d-478f-9ab3-0e991a5b53d7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.PartySampleFall2020/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PartySampleFall2020/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.PartySampleFall2020/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PartySampleFall2020/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.PartySampleFall2020/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PartySampleFall2020/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Submissions/CreeperController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Submissions/CreeperController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Submissions/CreeperHealth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Submissions/CreeperHealth.cs" afterDir="false" />
-    </list>
+    <list default="true" id="00f732f6-0f6d-478f-9ab3-0e991a5b53d7" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,6 +32,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/BasicEnemeyMovement.cs" />
         <option value="$PROJECT_DIR$/Assets/Submissions/CreeperHealth.cs" />
         <option value="$PROJECT_DIR$/Assets/Submissions/CreeperController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Tests/CreeperController.cs" />
       </list>
     </option>
   </component>
@@ -97,7 +92,7 @@
       <workItem from="1596807728038" duration="1173000" />
       <workItem from="1596852701809" duration="2066000" />
       <workItem from="1604845748552" duration="2291000" />
-      <workItem from="1605484410713" duration="374000" />
+      <workItem from="1605484410713" duration="977000" />
     </task>
     <servers />
   </component>
