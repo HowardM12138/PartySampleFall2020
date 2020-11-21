@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 25
+  deathSfx: {fileID: 0}
   onDeath:
     m_PersistentCalls:
       m_Calls:
@@ -371,12 +372,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4942a555e647643f995291cf5af700ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireSfx: {fileID: 0}
   damage: 5
   bulletSpeed: 8
   fireInterval: 0.2
   damageTag: Player
   fireOrigin: {fileID: 813382365139098910}
-  bulletPrototype: {fileID: 5128995502094200866, guid: fd0c7aa143f72472db4e0f8b848abb57,
+  bulletPrototype: {fileID: 8662257232425906404, guid: 9a39304b08048418391a300e5fc786f0,
     type: 3}
   lastFireTime: 0
 --- !u!1001 &1970839598773288764
