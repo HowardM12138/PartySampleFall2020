@@ -7,6 +7,7 @@ public class Health : MonoBehaviour {
 	
 	[Header("Settings")]
 	public int maxHealth;
+	public AudioClip deathSfx;
 	public UnityEvent onDeath;
 
 	[Header("Configurations")]
@@ -45,6 +46,10 @@ public class Health : MonoBehaviour {
 	}
 
 	public void SelfDestruct() {
+		if (deathSfx != null) {
+			AudioManager.PlayAtPoint(deathSfx, transform.position);
+		}
+		
 		Destroy(gameObject);
 	}
 }
