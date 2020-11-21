@@ -20,7 +20,17 @@
           <e p="ShotgunController.cs" t="Include" />
           <e p="WeaponController.cs" t="Include" />
         </e>
+        <e p="Submissions" t="Include">
+          <e p="BaseController.cs" t="Include" />
+          <e p="GrenadeController.cs" t="Include" />
+          <e p="GrenadePlayerController.cs" t="Include" />
+          <e p="GrenadeThrowerController.cs" t="Include" />
+          <e p="ShotgunController.cs" t="Include" />
+          <e p="ShotgunPlayerController.cs" t="Include" />
+        </e>
         <e p="Tests" t="Include">
+          <e p="CreeperController.cs" t="Include" />
+          <e p="CreeperHealth.cs" t="Include" />
           <e p="BaseController.cs" t="Include" />
           <e p="GrenadeController.cs" t="Include" />
           <e p="GrenadePlayerController.cs" t="Include" />
