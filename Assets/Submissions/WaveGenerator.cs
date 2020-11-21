@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WaveGenerator : MonoBehaviour
@@ -15,12 +16,17 @@ public class WaveGenerator : MonoBehaviour
         {
             this.enemies = enemies;
             this.numOfEnemy = numOfEnemy;
+            totalEnemies = SumList(numOfEnemy);
+            deadEnemies = 0;
         }
         
         [SerializeField]
         public List<GameObject> enemies;
         [SerializeField]
         public List<int> numOfEnemy;
+
+        public int deadEnemies;
+        public int totalEnemies;
     }
 
     public WaveEnumerator waveEnumerator;
@@ -44,9 +50,13 @@ public class WaveGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0) //if there are no more enemies
+        if (pattern == null)
         {
-            Debug.Log("load wave");
+            return;
+        }
+        if (pattern.totalEnemies == pattern.deadEnemies) //if there are no more enemies
+        {
+            //Debug.Log(pattern.totalEnemies);
             LoadNextWave();
         }
     }
@@ -77,6 +87,8 @@ public class WaveGenerator : MonoBehaviour
             controller.player = player.transform;
             controller.playerBase = playerBase.transform;
             controller.rigidbody = enemy.GetComponent<Rigidbody2D>();
+            var health = enemy.GetComponent<Health>();
+            health.onDeath.AddListener(DecreaseEnemies);
         }
         usedSpawnPoint.Clear();
     }
@@ -92,6 +104,22 @@ public class WaveGenerator : MonoBehaviour
             counter++, assigned = (assigned + 1) % numOfAll);
         usedSpawnPoint.Add(assigned);
         return spawnPoints[assigned];
+    }
+
+    private void DecreaseEnemies()
+    {
+        pattern.deadEnemies++;
+    }
+
+    private static int SumList(List<int> list)
+    {
+        int sum = 0;
+        foreach (int i in list)
+        {
+            sum += i;
+        }
+
+        return sum;
     }
 
     [Serializable]
