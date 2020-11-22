@@ -1,69 +1,66 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Transactions;
 using UnityEngine;
 
 public class CreeperController : MonoBehaviour
 {
-    public float encounterTime;
-    public float radius;
-    public int damage;
-    private float firstEncounterTime;
-    private BasicEnemyMovement movementController;
-    private float slowSpeed;
     
+    [Header("Settings")]
+    public float slowSpeed;
+    public float sneakSpeed;
+    public float encounterTime;
+    //public float range;
+    [Range(0f, 1f)]
+    //public float aggressiveness;
+    public float radius;
+
+    [Header("Configurations")]
+    public Transform pathStart;
+    public Transform pathEnd;
+
+    [Header("Status (Do not modify these fields through Editor)")]
+    public Transform to;
+    public GameObject target;
+    public float firstEncounterTime;
 
     // Start is called before the first frame update
     private void Start() {
+        to = pathEnd;
+        transform.position = pathStart.position;
+        target = GameObject.FindWithTag("Player");
         firstEncounterTime = 0;
-        GetComponent<Health>().onDeath.AddListener(Explode);
-        BasicEnemyMovement movementController = GetComponent<BasicEnemyMovement>();
-        slowSpeed = movementController.speed;
     }
 
 
     // Update is called once per frame
     private void Update()
     {
+        float speed;
         
         //check timer
         if (Time.time - firstEncounterTime >= encounterTime)
         {
-            Explode();
+            GetComponent<CreeperHealth>().Explode();
         }
-
-        if (movementController != null)
-        {
-            if (movementController.distanceSqrToTarget <= radius * radius)
+        
+        if (to) {
+            if (Vector3.Distance(transform.position, target.transform.position) <= radius)
             {
-                movementController.speed = slowSpeed * 2;
+                speed = sneakSpeed;
                 if (firstEncounterTime == 0)
                 {
                     firstEncounterTime = Time.time;
                 }
-            } 
+            }
             else
             {
-                movementController.speed = slowSpeed;
-            }   
-        }
+                speed = slowSpeed;
+            }
 
-    }
-    
-    public void Explode()
-    {
-        foreach (Collider2D col in Physics2D.OverlapCircleAll(transform.position, radius))
-        {
-            if (!(col.gameObject == gameObject) && (col.CompareTag("Player") || col.CompareTag("Enemy")))
-            {
-                if (col.TryGetComponent(out Health health)) {
-                    health.OnBulletHit(damage);
-                }
-            } 
+            transform.position = Vector3.MoveTowards(transform.position, to.position, speed * Time.deltaTime);
+            if (transform.position == to.transform.position) {
+                to = to == pathStart ? pathEnd : pathStart;
+            }
         }
-        
-        Destroy(gameObject);
-        
     }
-    
 }
