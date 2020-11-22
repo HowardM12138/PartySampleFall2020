@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserController : MonoBehaviour
-{
+public class LaserController : IWeapon {
     [Header("Settings")]
-	public KeyCode fireKey = KeyCode.Mouse0;
     public int damage;
 	public string damageTag = "Enemy";
     public float chargeTime = 3f;
@@ -15,34 +13,36 @@ public class LaserController : MonoBehaviour
     public GameObject bulletPrefab;
 
     // Private Variables
-    private float charge = 0f;
-    
-    void Update()
-    {
-        if(Input.GetKey(fireKey))
-        {
-            charge += Time.deltaTime;
-            //Debug.Log("Charge: " + charge);
-        }
+    private float chargeStartTime;
+    private bool charging;
 
-        if(Input.GetKeyUp(fireKey))
-        {
-            charge = 0f;
+    public override void OnTriggerPressed() {
+        if (charging != true) {
+            chargeStartTime = Time.time;
         }
+        charging = true;
+    }
 
-        if(charge >= chargeTime)
-        {
-            Shoot();
+    public override void OnTriggerReleased() {
+        charging = false;
+        chargeStartTime = Time.time;
+    }
+
+    void Update() {
+
+        if (charging) {
+            if (Time.time - chargeStartTime >= chargeTime) {
+                Shoot();
+            }
         }
     }
 
-    private void Shoot()
-    { 
+    private void Shoot() {
         var bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         var controller = bullet.GetComponent<LaserBulletController>();
         controller.damage = damage;
         controller.damageTag = damageTag;
 
-        charge = 0f;
+        charging = false;
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 
-public class BurstGunController : MonoBehaviour {
+public class BurstGunController : IWeapon {
 
 	[Header("Settings")]
 	public int damage;
@@ -16,7 +16,10 @@ public class BurstGunController : MonoBehaviour {
 
 	[Header("Status (Do not modify these fields through Editor)")]
 	public float lastFireTime;
-  
+
+	public override void OnTriggerPressed() {
+		Trigger();
+	}
 
 	public void Trigger() {
 		if (CanFire()) {
