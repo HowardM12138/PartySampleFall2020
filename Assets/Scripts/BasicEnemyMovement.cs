@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class BasicEnemyMovement : MonoBehaviour {
 
 	[Header("Settings")]
+	public int score = 1;
+	public int edge;
 	public float speed;
 	public Transform player;
 	public Transform playerBase;
@@ -14,12 +17,23 @@ public class BasicEnemyMovement : MonoBehaviour {
 	public Transform currentTarget;
 	public float distanceSqrToTarget;
 
+	public void Start() {
+		if (TryGetComponent(out Health health)) {
+			health.onDeath.AddListener(AddScore);
+		}
+	}
+
+	public void AddScore() {
+		if (WaveGenerator.instance) WaveGenerator.AddScore(score);
+	}
+
 	public void Update() {
 		FindTarget();
 		if (currentTarget == null) return;
 		float stopDistanceSqr = stopDistance * stopDistance;
 		// If it is away from the stop distance, move to the target with assigned velocity.
 		if (stopDistanceSqr < distanceSqrToTarget) rigidbody.velocity = (currentTarget.position - transform.position).normalized * speed;
+		else rigidbody.velocity = Vector3.zero;
 	}
 
 	public void FindTarget() {

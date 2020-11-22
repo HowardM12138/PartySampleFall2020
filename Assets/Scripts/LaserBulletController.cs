@@ -9,6 +9,8 @@ public class LaserBulletController : MonoBehaviour
     private float time = 0f;
     public string damageTag = "Player";
 	public int damage;
+	
+	private WaitForSeconds wait = new WaitForSeconds(0.05f);
 
     void Start()
     {
@@ -22,7 +24,7 @@ public class LaserBulletController : MonoBehaviour
             Color c = rend.material.color;
             c.a = f;
             rend.material.color = c;
-            yield return new WaitForSeconds(0.05f);
+            yield return wait;
         }
         Destroy(gameObject);
     }

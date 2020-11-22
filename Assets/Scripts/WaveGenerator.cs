@@ -1,22 +1,21 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
-public class WaveGenerator : MonoBehaviour
-{
-    
+public class WaveGenerator : MonoBehaviour {
+
+    public static WaveGenerator instance;
     
     [Serializable]
     public class WavePattern {
         // public int numOfEnemy;
         // public GameObject enemyType;
-        public WavePattern(List<GameObject> enemies, List<int> numOfEnemy)
-        {
-            this.enemies = enemies;
-            this.numOfEnemy = numOfEnemy;
-            totalEnemies = SumList(numOfEnemy);
+        public void Init() {
+            // this.enemies = enemies;
+            // this.numOfEnemy = numOfEnemy;
+            totalEnemies = numOfEnemy.Sum();
             deadEnemies = 0;
         }
         
@@ -24,7 +23,7 @@ public class WaveGenerator : MonoBehaviour
         public List<GameObject> enemies;
         [SerializeField]
         public List<int> numOfEnemy;
-
+        
         public int deadEnemies;
         public int totalEnemies;
     }
@@ -35,57 +34,55 @@ public class WaveGenerator : MonoBehaviour
     private List<int> usedSpawnPoint = new List<int>();
     public GameObject player;
     public GameObject playerBase;
+    public GameObject finishUI;
 
-    
     // Start is called before the first frame update
-    void Start()
-    {
-        foreach (GameObject spawnPoint in GameObject.FindGameObjectsWithTag("Respawn"))
-        {
-            spawnPoints.Add(spawnPoint);
-        }
+    void Start() {
+        instance = this;
+        foreach (GameObject spawnPoint in GameObject.FindGameObjectsWithTag("Respawn")) spawnPoints.Add(spawnPoint);
         LoadNextWave();
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (pattern == null)
-        {
-            return;
+    void Update() {
+        if (Input.GetKeyUp(KeyCode.Q)) {
+#if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
         }
-        if (pattern.totalEnemies == pattern.deadEnemies) //if there are no more enemies
-        {
-            //Debug.Log(pattern.totalEnemies);
+        
+        if (pattern == null) return;
+        if (pattern.totalEnemies == pattern.deadEnemies) { //if there are no more enemies
+            // Debug.Log(pattern.totalEnemies);
+            Debug.Log("Wave finished");
             LoadNextWave();
         }
     }
 
-    public void LoadNextWave()
-    {
+    public void LoadNextWave() {
         pattern = waveEnumerator.NextWave();
-        if (pattern == null)
-        {
+        
+        if (pattern == null) {
+            finishUI?.SetActive(true);
             return;
         }
         
-        for (int i = 0; i < pattern.enemies.Count; i++)
-        {
-            Spawn(i);
-        }
+        for (int i = 0; i < pattern.enemies.Count; i++) Spawn(i);
     }
     
-    public void Spawn(int index)
-    {
+    public void Spawn(int index) {
         int numOfEnemy = pattern.numOfEnemy[index];
-        for (int i = 0; i < numOfEnemy; i++)
-        {
+        for (int i = 0; i < numOfEnemy; i++) {
             GameObject spawnPoint =  ChooseSpawnPoint();
             var enemy = Instantiate(pattern.enemies[index], spawnPoint.transform.position, spawnPoint.transform.rotation);
             var controller = enemy.GetComponent<BasicEnemyMovement>();
-            controller.strategy =  (TargetStrategy)UnityEngine.Random.Range(0, 3);
+            controller.strategy =  (TargetStrategy) UnityEngine.Random.Range(0, 2);
             controller.player = player.transform;
-            controller.playerBase = playerBase.transform;
+            if (playerBase) {
+                controller.playerBase = playerBase.transform;
+            }
             controller.rigidbody = enemy.GetComponent<Rigidbody2D>();
             var health = enemy.GetComponent<Health>();
             health.onDeath.AddListener(DecreaseEnemies);
@@ -106,47 +103,27 @@ public class WaveGenerator : MonoBehaviour
         return spawnPoints[assigned];
     }
 
-    private void DecreaseEnemies()
-    {
+    private void DecreaseEnemies() {
         pattern.deadEnemies++;
     }
 
-    private static int SumList(List<int> list)
-    {
-        int sum = 0;
-        foreach (int i in list)
-        {
-            sum += i;
-        }
-
-        return sum;
-    }
-
     [Serializable]
-    public class WaveEnumerator
-    {
+    public class WaveEnumerator {
         [SerializeField] public WavePattern[] waves;
         private int index;
 
-        public WaveEnumerator()
-        {
-            index = 0;
+        public WaveEnumerator() => index = 0;
+
+        public WavePattern NextWave() {
+            WavePattern pattern = index == waves.Length ? null : waves[index++];
+            pattern?.Init();
+            return pattern;
         }
 
-        public WavePattern NextWave()
-        {
-            if (index == waves.Length)
-            {
-                return null;
-            }
-            return waves[index++];
-        }
-
-        public int NumWaves()
-        {
-            return waves.Length;
-        }
-        
+        public int NumWaves() => waves.Length;
     }
-    
+
+    public static void AddScore(int number) {
+        instance.player.GetComponent<PlayerController>().score += number;
+    }
 }

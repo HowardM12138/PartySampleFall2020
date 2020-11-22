@@ -4960,7 +4960,7 @@ GameObject:
   - component: {fileID: 3367298800859978942}
   - component: {fileID: 3367298800859978941}
   m_Layer: 0
-  m_Name: LaserGun
+  m_Name: LaserGunLv1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4995,12 +4995,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1591a1fdddb6ff4aa5544ffd9ceb32c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireSfx: {fileID: 0}
-  damage: 0
+  fireSfx: {fileID: 8300000, guid: b68d6e1e74b404353bc8d9cf35f2dd4c, type: 3}
+  damage: 4
   damageTag: Enemy
   chargeTime: 3
+  sight: {fileID: 1464099179946912627}
   firePoint: {fileID: 5469835763675924850}
-  bulletPrefab: {fileID: 3367298800580054994}
+  bulletPrefab: {fileID: 7338293640177683547, guid: 56a8c4362f7b8e040b4a9773e3ecbfe3,
+    type: 3}
 --- !u!212 &3367298800859978941
 SpriteRenderer:
   m_ObjectHideFlags: 0

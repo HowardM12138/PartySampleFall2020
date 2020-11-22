@@ -9,6 +9,7 @@ public class LaserController : IWeapon {
     public float chargeTime = 3f;
 
     [Header("Configurations")]
+    public LaserSight sight;
     public Transform firePoint;
     public GameObject bulletPrefab;
 
@@ -21,15 +22,21 @@ public class LaserController : IWeapon {
             chargeStartTime = Time.time;
         }
         charging = true;
+        sight.OnTriggerPressed();
     }
 
     public override void OnTriggerReleased() {
         charging = false;
         chargeStartTime = Time.time;
+        sight.OnTriggerReleased();
+    }
+
+    public override void SwitchOff() {
+        OnTriggerReleased();
+        base.SwitchOff();
     }
 
     void Update() {
-
         if (charging) {
             if (Time.time - chargeStartTime >= chargeTime) {
                 Shoot();
@@ -42,7 +49,7 @@ public class LaserController : IWeapon {
         var controller = bullet.GetComponent<LaserBulletController>();
         controller.damage = damage;
         controller.damageTag = damageTag;
-
         charging = false;
+        AudioManager.PlayAtPoint(fireSfx, transform.position);
     }
 }

@@ -11,6 +11,7 @@
           <e p="BulletController.cs" t="Include" />
           <e p="BurstGunController.cs" t="Include" />
           <e p="CameraFollower.cs" t="Include" />
+          <e p="CreeperController.cs" t="Include" />
           <e p="EdgeBehavior.cs" t="Include" />
           <e p="EnemyController.cs" t="Include" />
           <e p="GrenadeController.cs" t="Include" />
@@ -20,20 +21,14 @@
           <e p="LaserBulletController.cs" t="Include" />
           <e p="LaserController.cs" t="Include" />
           <e p="LaserSight.cs" t="Include" />
+          <e p="MissileController.cs" t="Include" />
+          <e p="MissileLauncherController.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
+          <e p="ScoreUpdate.cs" t="Include" />
           <e p="ShotgunController.cs" t="Include" />
-          <e p="WeaponController.cs" t="Include" />
-        </e>
-        <e p="Submissions" t="Include">
-          <e p="CreeperController.cs" t="Include" />
-          <e p="CreeperHealth.cs" t="Include" />
-          <e p="Dead Player Movement" t="Include">
-            <e p="DeadPlayerMovement.cs" t="Include" />
-          </e>
           <e p="WaveGenerator.cs" t="Include" />
-          <e p="Zolygon" t="Include">
-            <e p="ZolygonDamage.cs" t="Include" />
-          </e>
+          <e p="WeaponController.cs" t="Include" />
+          <e p="ZolygonDamage.cs" t="Include" />
         </e>
         <e p="Tests" t="Include">
           <e p="TestBehavior.cs" t="Include" />

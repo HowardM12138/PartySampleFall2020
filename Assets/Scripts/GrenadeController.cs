@@ -7,6 +7,7 @@ public class GrenadeController : MonoBehaviour {
     public int damage;
     public float timeToExplode;
     public float radius;
+    public AudioClip explodeSfx;
 
     [Header("Do not change these: ")]
     public float timeStart;
@@ -24,6 +25,7 @@ public class GrenadeController : MonoBehaviour {
     }
 
     private void Explode() {
+        AudioManager.PlayAtPoint(explodeSfx, transform.position);
         foreach (Collider2D col in Physics2D.OverlapCircleAll(transform.position, radius)) {
             if (col.CompareTag(damageTag)) {
                 if (col.TryGetComponent(out Health health)) {
@@ -31,7 +33,7 @@ public class GrenadeController : MonoBehaviour {
                 }
             } 
         }
-        
+
         Destroy(gameObject);
     }
 }
