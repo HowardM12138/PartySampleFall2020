@@ -216,10 +216,14 @@ MonoBehaviour:
       - {fileID: 1401048051}
       - {fileID: 693953045}
       numOfEnemy: 0200000002000000
+      deadEnemies: 0
+      totalEnemies: 4
     - enemies:
       - {fileID: 1401048051}
       - {fileID: 693953045}
       numOfEnemy: 0300000004000000
+      deadEnemies: 0
+      totalEnemies: 7
   player: {fileID: 631773989}
   playerBase: {fileID: 745110308}
 --- !u!4 &395388794

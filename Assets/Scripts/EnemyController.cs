@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour {
 	[Header("Configurations")]
 	public Transform pathStart;
 	public Transform pathEnd;
-	public WeaponController weapon;
+	public IWeapon weapon;
 
 	[Header("Status (Do not modify these fields through Editor)")]
 	public Transform to;
@@ -41,7 +41,8 @@ public class EnemyController : MonoBehaviour {
 				if (!Physics2D.Linecast(transform.position, targetPos, LayerMask.GetMask("Environment")).collider) {
 					if (weapon.CanFire()) {
 						if (Random.value < aggressiveness) {
-							weapon.Trigger();
+							weapon.OnTriggerPressed();
+							weapon.OnTriggerReleased();
 						}
 					}
 				}
