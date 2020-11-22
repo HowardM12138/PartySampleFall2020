@@ -802,12 +802,12 @@ PrefabInstance:
     - target: {fileID: 8764728493439019524, guid: fb1b62d92789f4dbf9111979a20d724e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8764728493439019524, guid: fb1b62d92789f4dbf9111979a20d724e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb1b62d92789f4dbf9111979a20d724e, type: 3}
@@ -2147,6 +2147,11 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 8564995820984355547, guid: d605b3e432dfe42f8b3932f418b6b493,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d605b3e432dfe42f8b3932f418b6b493, type: 3}
 --- !u!1 &1323816274
@@ -2644,7 +2649,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.22711764, g: 0.19215688, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2961,8 +2966,7 @@ MonoBehaviour:
     waves:
     - enemies:
       - {fileID: 5039177700917186434, guid: da73dfe22179f424f8f7c6aa4d900d60, type: 3}
-      - {fileID: 2254811359013989711, guid: 982d9edb1716345cfbbf74eaa5c0a6f6, type: 3}
-      numOfEnemy: 0500000001000000
+      numOfEnemy: 05000000
       deadEnemies: 0
       totalEnemies: 0
     - enemies:
