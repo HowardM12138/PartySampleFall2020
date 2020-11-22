@@ -718,7 +718,7 @@ PrefabInstance:
     - target: {fileID: 3614906384425027018, guid: 982d9edb1716345cfbbf74eaa5c0a6f6,
         type: 3}
       propertyPath: radius
-      value: 3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3614906384425027018, guid: 982d9edb1716345cfbbf74eaa5c0a6f6,
         type: 3}
@@ -867,3 +867,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7392292764773758002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7392292764773757994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94d0a7185728148fab45f3e88226154b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  player: {fileID: 2008366604}
+  playerBase: {fileID: 0}
+  strategy: 1
+  stopDistance: 1
+  rigidbody: {fileID: 7392292764773758001}
+  currentTarget: {fileID: 0}
+  distanceSqrToTarget: 0
